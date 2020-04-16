@@ -8,5 +8,5 @@ The latter is more efficient, but the former is a little more versatile.
 */
 
 function createBFS(grid, start, end) {
-  
+
 }
