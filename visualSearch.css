@@ -7,4 +7,10 @@
   display: grid;
   grid-template-columns: repeat(var(--colNum), 20px);
   grid-template-rows: repeat(var(--rowNum), 20px);
+  column-gap: 1px;
+  row-gap: 1px;
+}
+
+.grid-item {
+  background-color: black;
 }
