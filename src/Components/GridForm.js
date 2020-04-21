@@ -1,6 +1,7 @@
 import React from 'react';
 import './GridForm.css';
 import Slider from './Slider.js';
+import Submit from './Submit.js';
 
 function GridForm(props) {
   return (
@@ -10,6 +11,9 @@ function GridForm(props) {
         max="20"
         value={props.getDimensions}
         onChange={props.updateDimensions}
+      />
+      <Submit
+        name="Run"
       />
     </form>
   );
