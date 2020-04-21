@@ -6,7 +6,8 @@ function Submit(props) {
   return (
     <input type="submit"
       onClick={(e) => {
-        e.preventDefault()
+          e.preventDefault()
+          props.run();
         }
       }
     >{props.text}</input>

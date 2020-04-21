@@ -28,4 +28,4 @@ function GridItem(props) {
   );
 }
 
-export default GridItem; 
+export default GridItem;
