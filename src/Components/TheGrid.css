@@ -3,16 +3,12 @@
   --colNum: 20;
 }
 
-#grid {
+.theGrid {
+  width: 50%;
+  margin: auto;
   display: grid;
-  width: 90%;
   grid-template-columns: repeat(var(--colNum), auto);
   grid-template-rows: repeat(var(--rowNum), auto);
   column-gap: 1px;
   row-gap: 1px;
-}
-
-.grid-item {
-  background-color: black;
-  padding-top: 100%;
 }
