@@ -2,7 +2,7 @@ import React from 'react';
 import './GridForm.css';
 import Slider from './Slider.js';
 import Submit from './Submit.js';
-import RadioButton from './RadioButton.js';
+import MultipleChoice from './MultipleChoice';
 
 function GridForm(props) {
   return (
@@ -13,18 +13,14 @@ function GridForm(props) {
         value={props.getDimensions}
         onChange={props.updateDimensions}
       />
-      <RadioButton 
-        name="Obstacle"
-        category="GridClick"
-        value="OBSTACLE"
-        default={true}
-        onClick={() => props.setMode("OBSTACLE")}
-      />
-      <RadioButton 
-        name="Start"
-        category="GridClick"
-        value="START"
-        onClick={() => props.setMode("START")}
+      <MultipleChoice
+        options={[{
+          name: "option1",
+          onClick: () => alert("HEY"),
+        }, {
+          name: "option2",
+          onClick: () => 1
+        }]}
       />
       <Submit
         name="Run"
