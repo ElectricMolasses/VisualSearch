@@ -4,23 +4,25 @@ import Slider from './Slider.js';
 import Submit from './Submit.js';
 import MultipleChoice from './MultipleChoice';
 
-function GridForm(props) {
+function GridForm({
+  getDimensions, updateDimensions, getMode, setMode}) {
   return (
     <form>
       <Slider 
         min="2"
         max="20"
-        value={props.getDimensions}
-        onChange={props.updateDimensions}
+        value={getDimensions}
+        onChange={updateDimensions}
       />
       <MultipleChoice
         options={[{
           name: "option1",
-          onClick: () => alert("HEY"),
         }, {
           name: "option2",
-          onClick: () => 1
+        }, {
+          name: "option3",
         }]}
+        onClick={setMode}
       />
       <Submit
         name="Run"

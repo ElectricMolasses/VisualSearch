@@ -5,7 +5,7 @@ import GridForm from './GridForm.js';
 
 function GridContainer() {
   const [getDimensions, setDimensions] = useState(5);
-  const [getMode, setMode] = useState("AHH");
+  const [getMode, setMode] = useState(0);
 
   function updateDimensions(newDimension) {
     setDimensions(newDimension);
