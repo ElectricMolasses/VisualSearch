@@ -15,6 +15,7 @@ export default function MultipleChoice({
             setCurrent(i);
             onClick(i);
           }}
+          key={i}
           id={i}
           selected={getCurrent === i}
         />

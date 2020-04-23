@@ -2,16 +2,39 @@ import React from 'react';
 import './TheGrid.css';
 import GridItem from './GridItem';
 
-function TheGrid(props) {
+function TheGrid({ dimensions, mode }) {
+  function placeStart() {
+
+  }
+
+  function placeEnd() {
+
+  }
+
+  function placeObstacle() {
+
+  }
+
+  const clickFunc = {
+    0: placeObstacle,
+    1: placeStart,
+    2: placeEnd
+  }
   
   function generateGrid() {
     const gridItems = [];
     const root = document.documentElement;
     
-    root.style.setProperty('--rowNum', props.dimensions);
-    root.style.setProperty('--colNum', props.dimensions);
-    for (let i = 0; i < props.dimensions * props.dimensions; i++) {
-      gridItems.push(<GridItem id={i} key={i}/>);
+    root.style.setProperty('--rowNum', dimensions);
+    root.style.setProperty('--colNum', dimensions);
+    for (let i = 0; i < dimensions * dimensions; i++) {
+      gridItems.push(
+        <GridItem 
+          id={i} 
+          key={i}
+          onClick={clickFunc[mode]}
+          />
+      );
     }
     return gridItems;
   }

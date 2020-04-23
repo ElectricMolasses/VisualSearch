@@ -22,6 +22,7 @@ function GridContainer() {
       />
       <TheGrid
         dimensions={getDimensions}
+        mode={getMode}
       />
     </div>
   );
