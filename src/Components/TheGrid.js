@@ -24,18 +24,17 @@ function TheGrid({ dimensions, mode }) {
   //  start and end location in meta, since we're not
   //  allowed to duplicate those.
 
-  const clickFunc = {
-    0: mode => {
-      // We could use function currying.
-      changeTheGrid(theGrid)
-      return "obstacle";
-    },
-    1: mode => {
-      return "start";
-    },
-    2: mode => {
-      return "end";
+  function modifyGrid(x, y, type) {
+    let newGrid = theGrid.slice();
+    if (newGrid[y] === undefined) {
+      newGrid[y] = {};
     }
+    if (newGrid[y][x] === type) {
+      newGrid[y][x] = null;
+    } else {
+      newGrid[y][x] = type;
+    }
+    changeTheGrid(newGrid);
   }
   
   function generateGrid() {
@@ -50,7 +49,11 @@ function TheGrid({ dimensions, mode }) {
         <GridItem 
           id={i} 
           key={i}
-          onClick={clickFunc[mode]}
+          onClick={() => {
+            modifyGrid(
+              i % dimensions, Math.floor(i / dimensions), mode
+            )
+          }}
           />
       );
     }

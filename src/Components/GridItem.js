@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './GridItem.css';
 
-function GridItem(props) {
-  const {id} = props;
+function GridItem({ id, onClick }) {
   const [cellState, setCellState] = useState("EMPTY");
 
   function toggleState() {
@@ -22,7 +21,11 @@ function GridItem(props) {
 
   return (
     <div className="grid-item"
-      onClick={toggleState}
+      onClick={() => {
+          onClick()
+          toggleState()
+        }
+      }
       id={id}>
     </div>
   );
