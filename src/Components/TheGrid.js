@@ -1,39 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './TheGrid.css';
 import GridItem from './GridItem';
 
 function TheGrid({ dimensions, mode }) {
   const [theGrid, changeTheGrid] = useState(
-    () => {
-      // Just for fun.  Probably better to just use
-      //  a for loop.
-      let arr = [];
-      arr.length = (dimensions * dimensions);
-      arr.fill(0);
-      return arr;
-    }
+    []
   );
 
-  useEffect(() => {
-    const newGrid = theGrid.slice();
-    newGrid.length = dimensions * dimensions;
-    for (let i = 0; i < dimensions * dimensions; i++) {
-      // Comparing strict equals to undefined or
-      //  null was not working, so comparing typeof
-      //  instead.
-      if (typeof newGrid[i] === 'undefined') {
-        newGrid[i] = 0;
-      }
-    }
-    // Still need to maintain location of obstacles
-    //  and such when resizing.
-    // Find the row everything is on, find the offset
-    //  from the left, and move it back to that row with
-    //  that offset.
-    // For now, if the cell is removed due to shrinking,
-    //  just forget that obstacle.
-    changeTheGrid(newGrid);
-  }, [dimensions]);
+  // Still need to maintain location of obstacles
+  //  and such when resizing.
+  // Find the row everything is on, find the offset
+  //  from the left, and move it back to that row with
+  //  that offset.
+  // For now, if the cell is removed due to shrinking,
+  //  just forget that obstacle.
+
+  // Here's an idea.  Why even store it in an array that
+  //  represents the grid.
+  // Why not just have an array containing arrays for every
+  //  row, and that rows array contains all the index's
+  //  at which something exists.  Probably key value
+  //  pairs.  We'll probably have to track the
+  //  start and end location in meta, since we're not
+  //  allowed to duplicate those.
 
   const clickFunc = {
     0: mode => {
