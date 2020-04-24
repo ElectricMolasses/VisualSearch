@@ -16,11 +16,11 @@ function GridForm({
       />
       <MultipleChoice
         options={[{
-          name: "option1",
+          name: "Obstacle",
         }, {
-          name: "option2",
+          name: "Start",
         }, {
-          name: "option3",
+          name: "End",
         }]}
         onClick={setMode}
       />

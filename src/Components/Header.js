@@ -4,7 +4,10 @@ import './Header.css';
 function Header() {
   return (
     <div className="header">
-      I am header!
+      <p id="title">Some title here</p>
+      <nav>
+        Potential links to other pages.
+      </nav>
     </div>
   );
 }

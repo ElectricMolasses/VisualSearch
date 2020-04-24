@@ -5,7 +5,7 @@
 
 .theGrid {
   width: 50%;
-  margin: auto;
+  margin: 5px auto;
   display: grid;
   grid-template-columns: repeat(var(--colNum), auto);
   grid-template-rows: repeat(var(--rowNum), auto);
