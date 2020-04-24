@@ -50,7 +50,7 @@ function TheGrid({ dimensions, mode }) {
       let gridState = null;
       let currentX = i % dimensions;
       let currentY = Math.floor(i / dimensions);
-      console.log(theGrid[currentX]);
+
       if (theGrid[currentX] && 
           Number.isInteger(theGrid[currentX][currentY])) {
         gridState = theGrid[currentX][currentY];
@@ -70,7 +70,8 @@ function TheGrid({ dimensions, mode }) {
   }
 
   /*
-    Need a function that ties to the run button, that'll process current grid state,
+    Need a function that ties to the run button, that'll 
+      process current grid state,
       pass it to the search algorithm being used, and respond to that algorithms output
       on a tick rate to show the algorithm solving the maze.
   */

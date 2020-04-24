@@ -3,6 +3,14 @@
   padding-top: 100%;
 }
 
-.selected {
+.obstacle {
   background-color: red;
+}
+
+.start {
+  background-color: green;
+}
+
+.finish {
+  background-color: blue;
 }
