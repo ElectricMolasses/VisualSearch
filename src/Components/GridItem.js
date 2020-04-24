@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './GridItem.css';
 
 function GridItem({ id, onClick, state }) {
-  const [cellState, setCellState] = useState("EMPTY");
 
   const stateClass = {
     0: "obstacle",
