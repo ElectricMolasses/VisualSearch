@@ -3,27 +3,17 @@ import './TheGrid.css';
 import GridItem from './GridItem';
 
 function TheGrid({ dimensions, mode }) {
+  // theGrid isn't actually a grid.
+  //  It's an array containing objects on indexes
+  //  that represent the rows, with key-value pairs
+  //  for y-coord/cellState.
   const [theGrid, changeTheGrid] = useState(
     []
   );
-
-  // Still need to maintain location of obstacles
-  //  and such when resizing.
-  // Find the row everything is on, find the offset
-  //  from the left, and move it back to that row with
-  //  that offset.
-  // For now, if the cell is removed due to shrinking,
-  //  just forget that obstacle.
-
-  // Here's an idea.  Why even store it in an array that
-  //  represents the grid.
-  // Why not just have an array containing arrays for every
-  //  row, and that rows array contains all the index's
-  //  at which something exists.  Probably key value
-  //  pairs.  We'll probably have to track the
-  //  start and end location in meta, since we're not
-  //  allowed to duplicate those.
-
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
+  // These functions are reinstantiated each "Frame"
+  //  I think.  Should I move them outside?
   function modifyGrid(x, y, type) {
     let newGrid = theGrid.slice();
     if (newGrid[x] === undefined) {
@@ -31,8 +21,30 @@ function TheGrid({ dimensions, mode }) {
     }
     if (newGrid[x][y] === type) {
       newGrid[x][y] = null;
+      if (type === 1) {
+        setStart(null);
+      }
+      if (type === 2) {
+        setEnd(null);
+      }
     } else {
       newGrid[x][y] = type;
+      if (type === 1) {
+        // Remove old start location and
+        //  set new one.
+        if (start) {
+          newGrid[start.x][start.y] = null;
+        }
+        setStart({x: x, y: y});
+      }
+      if (type === 2) {
+        // Remove old end location and
+        //  set new one.
+        if (end) {
+          newGrid[end.x][end.y] = null;
+        }
+        setEnd({x: x, y: y});
+      }
     }
     changeTheGrid(newGrid);
   }
