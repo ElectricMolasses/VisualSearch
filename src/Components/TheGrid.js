@@ -26,13 +26,13 @@ function TheGrid({ dimensions, mode }) {
 
   function modifyGrid(x, y, type) {
     let newGrid = theGrid.slice();
-    if (newGrid[y] === undefined) {
-      newGrid[y] = {};
+    if (newGrid[x] === undefined) {
+      newGrid[x] = {};
     }
-    if (newGrid[y][x] === type) {
-      newGrid[y][x] = null;
+    if (newGrid[x][y] === type) {
+      newGrid[x][y] = null;
     } else {
-      newGrid[y][x] = type;
+      newGrid[x][y] = type;
     }
     changeTheGrid(newGrid);
   }
@@ -43,18 +43,27 @@ function TheGrid({ dimensions, mode }) {
 
     root.style.setProperty('--rowNum', dimensions);
     root.style.setProperty('--colNum', dimensions);
+
     for (let i = 0; i < dimensions * dimensions; i++) {
-      
+      //  Need to check to see whether or not the cell
+      //  has a state aside from null here.
+      let gridState = null;
+      let currentX = i % dimensions;
+      let currentY = Math.floor(i / dimensions);
+      console.log(theGrid[currentX]);
+      if (theGrid[currentX] && 
+          Number.isInteger(theGrid[currentX][currentY])) {
+        gridState = theGrid[currentX][currentY];
+      }
       gridItems.push(
         <GridItem 
           id={i} 
           key={i}
           onClick={() => {
-            modifyGrid(
-              i % dimensions, Math.floor(i / dimensions), mode
-            )
+            modifyGrid(currentX, currentY, mode)
           }}
-          />
+          state={gridState}
+        />
       );
     }
     return gridItems;
