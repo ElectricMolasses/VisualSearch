@@ -16,3 +16,11 @@
 .finish {
   background-color: var(--GridEndColour);
 }
+
+.pending-path {
+  background-color: var(--GridPathColour);
+}
+
+.explored-path {
+  background-color: black;
+}

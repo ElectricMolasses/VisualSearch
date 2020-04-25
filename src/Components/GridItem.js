@@ -6,7 +6,9 @@ function GridItem({ id, onClick, state }) {
   const stateClass = {
     0: "obstacle",
     1: "start",
-    2: "finish"
+    2: "finish",
+    3: "pending-path",
+    4: "explored-path"
   };
 
   return (

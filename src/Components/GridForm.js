@@ -5,7 +5,8 @@ import Submit from './Submit.js';
 import MultipleChoice from './MultipleChoice';
 
 function GridForm({
-  getDimensions, updateDimensions, getMode, setMode}) {
+  getDimensions, updateDimensions, getMode, setMode,
+    startSearch, isRunning }) {
   return (
     <form>
       <Slider 
@@ -26,7 +27,8 @@ function GridForm({
       />
       <Submit
         name="Run"
-        run={() => undefined}  //Run search
+        run={startSearch}
+        disabled={isRunning}
       />
     </form>
   );
