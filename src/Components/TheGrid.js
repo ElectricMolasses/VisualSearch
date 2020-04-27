@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './TheGrid.css';
 import GridItem from './GridItem';
 
-function TheGrid({ dimensions, mode }) {
+function TheGrid({ dimensions, mode,
+  isRunning, searchComplete }) {
   // theGrid isn't actually a grid.
   //  It's an array containing objects on indexes
   //  that represent the rows, with key-value pairs
@@ -10,11 +11,21 @@ function TheGrid({ dimensions, mode }) {
   const [theGrid, changeTheGrid] = useState(
     []
   );
+  // Track start/end to avoid duplicates when placing.
+  // We do not need to send these to the search alg,
+  //  they already exist in theGrid.
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
+
+  function startSearch() {
+    // someSearchAlg(theGrid);
+  }
   // These functions are reinstantiated each "Frame"
   //  I think.  Should I move them outside?
   function modifyGrid(x, y, type) {
+    // Do not allow changes while search is running.
+    if (isRunning) return;
+    
     let newGrid = theGrid.slice();
     if (newGrid[x] === undefined) {
       newGrid[x] = {};
@@ -49,6 +60,8 @@ function TheGrid({ dimensions, mode }) {
     changeTheGrid(newGrid);
   }
   
+  // This function could really be split apart
+  //  a little and tidied up.
   function generateGrid() {
     const gridItems = [];
     const root = document.documentElement;
