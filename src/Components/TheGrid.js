@@ -39,6 +39,11 @@ function TheGrid({ dimensions, mode,
         setEnd(null);
       }
     } else {
+      if (type === 0) {
+        if (newGrid[x][y] === 1) setStart(null);
+        if (newGrid[x][y] === 2) setEnd(null);
+      }
+      
       newGrid[x][y] = type;
       if (type === 1) {
         // Remove old start location and
