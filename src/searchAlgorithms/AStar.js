@@ -20,13 +20,31 @@ function AStar(gridSize, objects) {
   closedQueue.add(start);
   pendingQueue.add(...getSurroundingCells(
     start, gridSize, objects
-  ))
+  ));
   
   while (true) {
     for (let cell of pendingQueue) {
-      cell.d = calculateDistance(cell, goal);
-      if (cell.d === 0) {
-        return record;
+      if (cell.type === 0) {
+        cell.diaDistance = calculateDiagonalDistance(cell, goal);
+      }
+      if (cell.type === 2) {
+        //  Uncollapse parent structure from cell for path.
+        const route = [];
+        let backtrackCell = cell;
+
+        while (backtrackCell.parent !== null) {
+          route.unshift({
+            x: backtrackCell.x, 
+            y: backtrackCell.y
+          });
+          backtrackCell = backtrackCell.parent;
+        }
+        route.unshift({
+          x: backtrackCell.x, 
+          y: backtrackCell.y
+        });
+
+        return {record, route};
       }
     }
   }
@@ -40,8 +58,7 @@ function getSurroundingCells(cell, gridSize, objects) {
       if (
         (x !== cell.x || y !== cell.y) &&
         (x >= 0 && y >= 0) &&
-        (x < gridSize && y < gridSize) &&
-        objects[x][y]
+        (x < gridSize && y < gridSize)
       ) {
         surroundingCells.add(generateCell(
           x, y, objects[x][y], cell
@@ -58,7 +75,7 @@ function findStart(objects) {
     for (let y in objects) {
       if (objects[x][y] === 1) {
         let start = generateCell(x, y, 1);
-        calculateDistance(start, start);
+        calculateDiagonalDistance(start, start);
       }
     }
   }
@@ -73,22 +90,32 @@ function findEnd(objects) {
     }
   }
 }
-
-function generateCell(x, y, t, parent, distance) {
+// Could pass this func an object to make things more versatile.
+function generateCell(x, y, type, parent, distance) {
   return {
     x: x,
     y: y,
-    t: t,
-    d: (distance || null),
+    type: (type || 0),
+    diaDistance: (distance || null),
+    euDistance: null,
     parent: (parent || null)
   }
 }
 
-function calculateDistance(cell, goal) {
+function calculateDiagonalDistance(cell, goal) {
   return (
     Math.max(
       Math.abs(cell.x - goal.x),
       Math.abs(cell.y - goal.y)
     )
   );
+}
+
+function calculateEuclideanDistance(cell, goal) {
+  return (
+    Math.sqrt(
+      Math.pow(cell.x - goal.x, 2) +
+      Math.pow(cell.y - goal.y, 2)
+    )
+  )
 }
