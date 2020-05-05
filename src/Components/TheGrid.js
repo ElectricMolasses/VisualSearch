@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './TheGrid.css';
 import GridItem from './GridItem';
+import AStar from '../searchAlgorithms/AStar';
 
 function TheGrid({ dimensions, mode,
   isRunning, searchComplete }) {
@@ -17,8 +18,13 @@ function TheGrid({ dimensions, mode,
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
 
+  if (isRunning) {
+    startSearch();
+  }
+
   function startSearch() {
-    // someSearchAlg(theGrid);
+    let result = AStar(dimensions, theGrid);
+    console.log(result);
 
     // Need to return a promise that will .then(searchCompleted());
   }

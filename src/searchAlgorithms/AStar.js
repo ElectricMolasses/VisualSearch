@@ -9,6 +9,8 @@ function AStar(gridSize, objects) {
   const closedQueue = new Set();
   const goal = findEnd(objects);
   const start = findStart(objects);
+  console.log(start);
+  console.log(goal);
 
   if (!goal && !start) return new Error(
     "Start or Goal nonexistent, or out of bounds."
@@ -94,7 +96,7 @@ function findStart(objects) {
     for (let y in objects) {
       if (objects[x][y] === 1) {
         let start = generateCell(x, y, 1);
-        calculateDiagonalDistance(start, start);
+        return start;
       }
     }
   }
@@ -112,8 +114,8 @@ function findEnd(objects) {
 // Could pass this func an object to make things more versatile.
 function generateCell(x, y, type, parent, distance) {
   return {
-    x: x,
-    y: y,
+    x: parseInt(x),
+    y: parseInt(y),
     type: (type || 0),
     diaDistance: (distance || null),
     euDistance: null,
@@ -138,3 +140,5 @@ function calculateEuclideanDistance(cell, goal) {
     )
   )
 }
+
+export default AStar;
