@@ -19,6 +19,8 @@ function TheGrid({ dimensions, mode,
 
   function startSearch() {
     // someSearchAlg(theGrid);
+
+    // Need to return a promise that will .then(searchCompleted());
   }
   // These functions are reinstantiated each "Frame"
   //  I think.  Should I move them outside?

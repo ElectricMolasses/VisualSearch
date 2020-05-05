@@ -10,6 +10,10 @@ function AStar(gridSize, objects) {
   const goal = findEnd(objects);
   const start = findStart(objects);
 
+  if (!goal && !start) return new Error(
+    "Start or Goal nonexistent, or out of bounds."
+  );
+
   // Start is added straight to the closed queue for
   //  the sole purpose of not adding it to record.
   //  The colour should not change on the visual
@@ -23,9 +27,20 @@ function AStar(gridSize, objects) {
   ));
   
   while (true) {
+    // Cell closest to goal by distance formula.
+    let lowestCell = undefined;
+    let lowestCellValue = undefined;
+
     for (let cell of pendingQueue) {
       if (cell.type === 0) {
         cell.diaDistance = calculateDiagonalDistance(cell, goal);
+        if (lowestCellValue === undefined) {
+          lowestCellValue = cell.diaDistance;
+          lowestCell = cell;
+        } else if (cell.diaDistance < lowestCellValue) {
+          lowestCellValue = cell.diaDistance;
+          lowestCell = cell;
+        }
       }
       if (cell.type === 2) {
         //  Uncollapse parent structure from cell for path.
@@ -47,6 +62,10 @@ function AStar(gridSize, objects) {
         return {record, route};
       }
     }
+    // Code to select next cell to expand.
+    pendingQueue.add(...getSurroundingCells(
+      lowestCell, gridSize, objects
+    ));
   }
 }
 
